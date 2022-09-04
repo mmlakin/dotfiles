@@ -7,10 +7,15 @@
 
 - create:
     - ~/src
+    - ~/bin
 
 - link:
     ~/.zshrc:
       force: true
+    ~/.config/tmux:
+      force: true
+      glob: true
+      path: tmux/*
     ~/.config/nvim:
       force: true
       glob: true
