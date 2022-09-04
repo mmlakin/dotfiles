@@ -11,6 +11,11 @@
 - link:
     ~/.zshrc:
       force: true
+    ~/.config/nvim:
+      force: true
+      glob: true
+      path: vim/*
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - [nvim +PlugInstall +qall, Installing nvim plugins]
