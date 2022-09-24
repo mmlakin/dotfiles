@@ -24,3 +24,5 @@ eval $(shellclear --init-shell)
 
 # Created by `pipx` on 2022-07-29 04:04:03
 export PATH="$PATH:/Users/mlakin/.local/bin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -58,10 +58,11 @@ let g:mapleader = "\<SPACE>"
 nnoremap <Leader>p :let @x=@* \| let @y=@+ \| put<CR>
 
 " bufexplorer shortcut
-nnoremap <Leader>ls :BufExplorerHorizontalSplit<CR>
+"nnoremap <Leader>ls :BufExplorerHorizontalSplit<CR>
+nnoremap <Leader>l :<C-u>Buffers<CR>
 
 " next buffer shortcut
 nnoremap <Leader><Tab> :bn<CR>
 
 " FZF shortcut
-nnoremap <leader>f :<C-u>FZF ~<CR> 
+nnoremap <leader>f :<C-u>Files! ~<CR> 
