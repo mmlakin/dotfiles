@@ -24,6 +24,12 @@ call plug#begin(expand('<sfile>:p:h') . '/plugged')
   " sensible defaults
   Plug 'tpope/vim-sensible'
 
+  " Additional info for ga command
+  Plug 'tpope/vim-characterize'
+
+  " Terraform syntax highlighting and commands
+  Plug 'hashivim/vim-terraform'
+
   " powershell syntax highlighting
   Plug 'pprovost/vim-ps1'
 
@@ -34,7 +40,8 @@ call plug#begin(expand('<sfile>:p:h') . '/plugged')
   Plug 'tpope/vim-surround'
 
   " automatically add closing brackets/parenthesis while typing
-  Plug 'townk/vim-autoclose'
+  Plug 'm4xshen/autoclose.nvim'
+  " Plug 'townk/vim-autoclose'
 
   " commenting lines using gc
   Plug 'tomtom/tcomment_vim'
@@ -80,6 +87,9 @@ call plug#begin(expand('<sfile>:p:h') . '/plugged')
 
   " buffer explorer
   Plug 'jlanzarotta/bufexplorer'
+
+  " show function context
+  Plug 'wellle/context.vim'
 call plug#end()
 
 "

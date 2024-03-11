@@ -1,6 +1,7 @@
 export DOTFILES="$HOME/.dotfiles"
 export XDG_CONFIG_HOME="$HOME/.config"
 export ZSH="$DOTFILES/oh-my-zsh"
+export EDITOR=$(command -v nvim)
 
 ZSH_THEME="refined"
 DISABLE_AUTO_TITLE="true"

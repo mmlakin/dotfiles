@@ -1,6 +1,7 @@
 set secure " prevent rc files from auto running dangerous cmds
 
 source ~/.config/nvim/plugins.vim " install plugins
+source ~/.config/nvim/init.lua.vim " run lua init config
 
 set nocompatible " not vim compatible
 set ttyfast " make redraw quick
