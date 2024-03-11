@@ -26,5 +26,10 @@
       path: vim/*
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
-  - [nvim +PlugInstall +qall, Installing nvim plugins]
+    - [git submodule update --init --recursive, Installing submodules]
+    - [nvim +PlugInstall +qall, Installing nvim plugins]
+    -
+        description: Copy files to /etc/paths.d/ (SUDO REQUIRED)
+        command: for pathfile in $(ls ./paths.d/); do sudo cp ./paths.d/$pathfile /etc/paths.d/ 1>/dev/null; done
+        quiet: true
+        stderr: true
