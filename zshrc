@@ -22,8 +22,6 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit
 eval $(shellclear --init-shell)
 
-export PATH="$PATH:/Users/mlakin/.local/bin"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # load tmuxp session
