@@ -1,0 +1,12 @@
+session_name: '4-way'
+shell_command_before: clear
+start_directory: /Users/mlakin/src
+windows:
+  - window_name: 4-way
+    layout: tiled
+    panes:
+      - shell_command: clear && nvim
+      - shell_command: clear && python3
+      - shell_command: clear && shellclear find
+        focus: true
+      - shell_command: clear && pwsh

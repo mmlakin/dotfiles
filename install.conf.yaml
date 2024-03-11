@@ -16,6 +16,10 @@
       force: true
       glob: true
       path: tmux/*
+    ~/.tmuxp:
+      force: true
+      glob: true
+      path: tmux/tmuxp/*
     ~/.config/nvim:
       force: true
       glob: true

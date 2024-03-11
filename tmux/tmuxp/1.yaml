@@ -1,0 +1,7 @@
+session_name: 'single'
+start_directory: /Users/mlakin/src
+shell_command_before: clear
+windows:
+  - window_name: single
+    panes:
+      - shellclear find

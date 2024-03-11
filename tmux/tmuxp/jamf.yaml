@@ -1,0 +1,10 @@
+session_name: 'jamf'
+start_directory: ~/src/nerdjamf/scripts/
+windows:
+  - window_name: jamf
+    layout: f588,318x75,0,0{159x75,0,0,0,158x75,160,0[158x37,160,0,1,158x37,160,38,2]}
+    panes:
+      - shell_command: nvim ~/src/nerdjamf/scripts/
+        focus: true
+      - shell_command: clear && shellclear find
+      - shell_command: clear && shellclear --no-banner find

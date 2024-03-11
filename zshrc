@@ -22,7 +22,11 @@ source $ZSH/oh-my-zsh.sh
 autoload -U compinit
 eval $(shellclear --init-shell)
 
-# Created by `pipx` on 2022-07-29 04:04:03
 export PATH="$PATH:/Users/mlakin/.local/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# load tmuxp session
+if command -v tmux>/dev/null && test -z "$TMUX"; then
+    tmuxp load -y 1 4 iac jamf dotfiles
+fi
