@@ -20,6 +20,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source $DOTFILES/aliases
 autoload -U compinit
 eval $(shellclear --init-shell)
 
