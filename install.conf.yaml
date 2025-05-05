@@ -24,10 +24,14 @@
       force: true
       glob: true
       path: vim/*
+    ~/.config/powershell/*:
+      glob: true
+      path: pwsh/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - [nvim +PlugInstall +qall, Installing nvim plugins]
+    - [pwsh ./pwsh/modules.ps1, Installing Powershell modules]
     -
         description: Copy files to /etc/paths.d/ (SUDO REQUIRED)
         command: for pathfile in $(ls ./paths.d/); do sudo cp ./paths.d/$pathfile /etc/paths.d/ 1>/dev/null; done
