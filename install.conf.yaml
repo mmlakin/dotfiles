@@ -46,3 +46,11 @@
       description: Installing Claude Code
       stdout: true
       stderr: true
+
+# macOS system settings. Idempotent, no sudo. See the script for what
+# each setting does and why.
+- shell:
+    - command: ./scripts/macos-defaults.sh
+      description: Applying macOS defaults
+      stdout: true
+      stderr: true
