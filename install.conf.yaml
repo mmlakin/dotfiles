@@ -34,3 +34,15 @@
       stdin: true
       stdout: true
       stderr: true
+
+# Claude Code. Use Anthropic's native installer rather than the
+# claude-code cask, because the native build updates itself and the
+# cask lags behind. It installs to ~/.local/bin, which zshrc puts on
+# PATH. Skipped when an install already exists.
+- shell:
+    - command: >-
+        [ -x "$HOME/.local/bin/claude" ] ||
+        curl -fsSL https://claude.ai/install.sh | bash
+      description: Installing Claude Code
+      stdout: true
+      stderr: true
