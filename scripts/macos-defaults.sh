@@ -180,10 +180,7 @@ for app in Dock Finder SystemUIServer; do
     killall "$app" >/dev/null 2>&1 || true
 done
 
-# Reload symbolic hotkeys so the shift-cmd-4 binding works without a
-# re-login. This is a private framework, so skip it if it ever moves.
-activate=/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings
-[[ -x "$activate" ]] && "$activate" -u
-
+# Symbolic hotkeys only reload at login. The private activateSettings
+# -u trick crashes on macOS 15, so there is no reliable live reload.
 echo
-echo "Done. If caps lock or shift-cmd-4 misbehave, log out and back in."
+echo "Done. Log out and back in once for the shift-cmd-4 binding."
