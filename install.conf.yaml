@@ -1,21 +1,15 @@
 - defaults:
     link:
-        create: true
-        relink: true
+      create: true
+      relink: true
+    create:
+      mode: 0700
 
-- clean: ['~']
+- clean: ['~', '~/.config']
 
 - create:
     - ~/src
-
-- link:
-    ~/.zshrc:
-      force: true
-    ~/.config/nvim:
-      force: true
-      glob: true
-      path: vim/*
+    - ~/bin
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
-  - [nvim +PlugInstall +qall, Installing nvim plugins]
+    - [git submodule update --init --recursive, Installing submodules]
