@@ -39,14 +39,16 @@ remap_caps_lock_to_escape() {
     local keyboard_id
     while IFS= read -r keyboard_id; do
         echo "  remapping caps lock on ${keyboard_id}"
+        # XML form so the values are stored as integers. The old-style
+        # `( { Src = 3006...; } )` form stores them as strings, which
+        # login and activateSettings both choke on.
         defaults -currentHost write NSGlobalDomain \
-            "com.apple.keyboard.modifiermapping.${keyboard_id}" \
-            '(
-                {
-                    HIDKeyboardModifierMappingSrc = 30064771129;
-                    HIDKeyboardModifierMappingDst = 30064771113;
-                }
-            )'
+            "com.apple.keyboard.modifiermapping.${keyboard_id}" -array '
+                <dict>
+                    <key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer>
+                    <key>HIDKeyboardModifierMappingDst</key><integer>30064771113</integer>
+                </dict>
+            '
     done <<<"$keyboard_ids"
 
     # The defaults above only load at login. hidutil applies the same
