@@ -11,6 +11,13 @@
     - ~/src
     - ~/bin
 
+# zsh. backup rather than force, so an existing ~/.zshrc on a new
+# machine is renamed aside instead of deleted.
+- link:
+    ~/.zshrc:
+      path: zshrc
+      backup: true
+
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
 

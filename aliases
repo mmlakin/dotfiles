@@ -1,0 +1,5 @@
+# Sourced by zshrc after oh-my-zsh, so these win over plugin aliases.
+
+if (( $+commands[nvim] )); then
+  alias vim='nvim'
+fi
