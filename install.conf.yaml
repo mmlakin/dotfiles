@@ -46,3 +46,16 @@
       description: Installing Claude Code
       stdout: true
       stderr: true
+
+# macOS system settings. Idempotent, no sudo. See the script for what
+# each setting does and why.
+- shell:
+    - command: ./scripts/macos-defaults.sh
+      description: Applying macOS defaults
+      stdout: true
+      stderr: true
+
+# Start Alfred if it isn't running, so a fresh install is ready to
+# take cmd-space. Opening it in the background skips the focus jump.
+- shell:
+    - [pgrep -xq Alfred || open -ga "Alfred 5" || true, Launching Alfred]
