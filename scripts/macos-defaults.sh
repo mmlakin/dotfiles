@@ -101,6 +101,32 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 31 '
     </dict>
 '
 
+# Free cmd-space for Alfred
+#
+# Alfred cannot claim cmd-space while Spotlight holds it (hotkey 64).
+# Disable it but keep the combo recorded, so re-enabling it in System
+# Settings restores cmd-space. Opt-cmd-space Finder search (65) stays.
+# Alfred's own hotkey travels in its preferences sync folder.
+# 32 is ascii space, 49 its keycode, 1048576 is cmd.
+# Takes effect at next login.
+echo "Disabling Spotlight's cmd-space"
+
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '
+    <dict>
+        <key>enabled</key><false/>
+        <key>value</key>
+        <dict>
+            <key>type</key><string>standard</string>
+            <key>parameters</key>
+            <array>
+                <integer>32</integer>
+                <integer>49</integer>
+                <integer>1048576</integer>
+            </array>
+        </dict>
+    </dict>
+'
+
 # Configure dock
 #
 # Zero delay and zero animation make the autohidden dock feel instant
@@ -183,4 +209,5 @@ done
 # Symbolic hotkeys only reload at login. The private activateSettings
 # -u trick crashes on macOS 15, so there is no reliable live reload.
 echo
-echo "Done. Log out and back in once for the shift-cmd-4 binding."
+echo "Done. Log out and back in once for the shift-cmd-4 and cmd-space"
+echo "hotkey changes."
