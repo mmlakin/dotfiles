@@ -54,3 +54,8 @@
       description: Applying macOS defaults
       stdout: true
       stderr: true
+
+# Start Alfred if it isn't running, so a fresh install is ready to
+# take cmd-space. Opening it in the background skips the focus jump.
+- shell:
+    - [pgrep -xq Alfred || open -ga "Alfred 5" || true, Launching Alfred]
