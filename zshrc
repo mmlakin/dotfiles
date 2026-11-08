@@ -2,7 +2,7 @@
 #
 # First, so everything below can find brew-installed tools. Prefers the
 # native Apple Silicon prefix and falls back to Intel. Never hardcode
-# one prefix.
+# one prefix. shellenv also puts brew's zsh completions on fpath.
 for brew_prefix in /opt/homebrew /usr/local; do
   if [[ -x $brew_prefix/bin/brew ]]; then
     eval "$($brew_prefix/bin/brew shellenv)"
@@ -16,7 +16,7 @@ unset brew_prefix
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 # Layer hook, early. Work and personal layer repos link this file to
-# set variables or preset plugins before anything below reads them.
+# set variables before anything below reads them.
 [[ -f ~/.zshrc_local_before ]] && source ~/.zshrc_local_before
 
 export DOTFILES="$HOME/.dotfiles"
@@ -27,40 +27,51 @@ else
   export EDITOR=vim
 fi
 
+# History
+#
+# One large history shared live between all open shells, so a command
+# run in one tab is searchable from another. Duplicates and commands
+# typed with a leading space are left out.
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS
+
+# Completion
+#
+# Tab opens a menu you can arrow through. Lowercase matches uppercase,
+# so `cd doc<tab>` finds Documents.
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# vi mode
+#
+# Esc switches the command line to vi normal mode. KEYTIMEOUT=1 makes
+# that switch take 10ms instead of the default 400ms. Backspace is
+# rebound because vi's own version stops at the point where insert
+# mode began, which feels broken after hopping back from normal mode.
+bindkey -v
+KEYTIMEOUT=1
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^H' backward-delete-char
+
+# fzf
+#
+# Ctrl-R fuzzy-searches history: type to narrow, Enter to pick. Also
+# binds Ctrl-T to pick a file path and Alt-C to cd into a directory.
+# Loaded after `bindkey -v` so its keys land in vi insert mode too.
+if (( $+commands[fzf] )); then
+  source <(fzf --zsh)
+fi
+
 # pyenv
 #
-# Pins Python interpreters per project. Initialized before oh-my-zsh
-# so its shims come first on PATH.
+# Pins Python interpreters per project. Its shims go first on PATH.
 if (( $+commands[pyenv] )); then
   eval "$(pyenv init - zsh)"
 fi
 
-# oh-my-zsh
-#
-# Vendored as a submodule, so the submodule pin decides the version and
-# omz's own updater is turned off. Its cache lives outside the
-# submodule to keep the checkout clean.
-export ZSH="$DOTFILES/oh-my-zsh"
-export ZSH_CACHE_DIR="$HOME/.cache/oh-my-zsh"
-zstyle ':omz:update' mode disabled
-
-ZSH_THEME="refined"
-DISABLE_AUTO_TITLE="true"
-COMPLETION_WAITING_DOTS="true"
-
-# Appended rather than assigned, so a layer can add its own in
-# ~/.zshrc_local_before, for example `plugins=(aws)` for work.
-plugins+=(
-  brew
-  fzf
-  vi-mode
-  git
-  last-working-dir
-  zoxide
-  fancy-ctrl-z
-)
-
-source "$ZSH/oh-my-zsh.sh"
 source "$DOTFILES/aliases"
 
 # shellclear
@@ -69,6 +80,14 @@ source "$DOTFILES/aliases"
 # it finds.
 if (( $+commands[shellclear] )); then
   eval "$(shellclear --init-shell)"
+fi
+
+# Prompt
+#
+# Starship, with its default config. Its prompt character changes in
+# vi normal mode, so it doubles as the mode indicator.
+if (( $+commands[starship] )); then
+  eval "$(starship init zsh)"
 fi
 
 # Layer hook, late. Aliases, functions and overrides that need

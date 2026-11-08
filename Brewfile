@@ -24,9 +24,9 @@ brew "neovim"
 brew "tmux"
 brew "tmuxp"
 brew "fzf"
+# Prompt. zshrc runs `starship init zsh` when it is installed.
+brew "starship"
 brew "ripgrep"
-# zoxide replaces fasd, which was removed from Homebrew core.
-brew "zoxide"
 
 # Required by nvim-treesitter to build parsers that ship no binary.
 brew "tree-sitter"
