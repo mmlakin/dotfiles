@@ -13,3 +13,36 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
+
+# Homebrew. Both steps are idempotent. The PATH export covers the
+# first run, before any zshrc has run brew shellenv. Homebrew refuses
+# untrusted taps, so shellclear's tap is added and trusted first.
+- shell:
+    - command: >-
+        [ -x /opt/homebrew/bin/brew ] || [ -x /usr/local/bin/brew ] ||
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      description: Bootstrapping Homebrew
+      stdin: true
+      stdout: true
+      stderr: true
+    - command: >-
+        export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" &&
+        brew tap rusty-ferris-club/tap &&
+        brew trust --tap rusty-ferris-club/tap &&
+        brew bundle install --file=Brewfile --no-upgrade
+      description: Installing Brewfile
+      stdin: true
+      stdout: true
+      stderr: true
+
+# Claude Code. Use Anthropic's native installer rather than the
+# claude-code cask, because the native build updates itself and the
+# cask lags behind. It installs to ~/.local/bin, which zshrc puts on
+# PATH. Skipped when an install already exists.
+- shell:
+    - command: >-
+        [ -x "$HOME/.local/bin/claude" ] ||
+        curl -fsSL https://claude.ai/install.sh | bash
+      description: Installing Claude Code
+      stdout: true
+      stderr: true
