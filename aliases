@@ -1,5 +1,21 @@
-# Sourced by zshrc after oh-my-zsh, so these win over plugin aliases.
+# Sourced by zshrc.
 
 if (( $+commands[nvim] )); then
   alias vim='nvim'
 fi
+
+# git
+#
+# Only the commands actually used, under the names oh-my-zsh gave them
+# so muscle memory carries over. gcob follows from gco, not omz's gcb.
+# There is deliberately no push alias. Pushing stays a typed command,
+# and gitconfig's push.autoSetupRemote handles the first push of a
+# new branch.
+alias gst='git status'
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias glog='git log --oneline --decorate --graph'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gfa='git fetch --all --tags --prune --jobs=10'
+alias gbD='git branch --delete --force'
