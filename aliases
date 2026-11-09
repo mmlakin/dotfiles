@@ -6,16 +6,35 @@ fi
 
 # git
 #
-# Only the commands actually used, under the names oh-my-zsh gave them
-# so muscle memory carries over. gcob follows from gco, not omz's gcb.
-# There is deliberately no push alias. Pushing stays a typed command,
-# and gitconfig's push.autoSetupRemote handles the first push of a
-# new branch.
+# Only the commands actually used. Names follow oh-my-zsh where its
+# names were already muscle memory. gcob follows from gco instead of
+# omz's gcb, and gcm is commit -m here, not omz's checkout-main.
+
+# Looking around
 alias gst='git status'
 alias gd='git diff'
 alias gdca='git diff --cached'
 alias glog='git log --oneline --decorate --graph'
+
+# Branches
+alias gb='git branch'
 alias gco='git checkout'
 alias gcob='git checkout -b'
-alias gfa='git fetch --all --tags --prune --jobs=10'
 alias gbD='git branch --delete --force'
+
+# Staging and committing
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit --verbose'
+alias gcm='git commit -m'
+
+# Syncing
+#
+# gpu pushes the current branch to the same name on origin and tracks
+# it. HEAD means the branch you are on. Once tracked it is just a push.
+# gpsu is for naming the remote and branch yourself:
+# `gpsu upstream my-branch`.
+alias gfa='git fetch --all --tags --prune --jobs=10'
+alias gl='git pull'
+alias gpu='git push --set-upstream origin HEAD'
+alias gpsu='git push --set-upstream'
