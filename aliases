@@ -30,11 +30,13 @@ alias gcm='git commit -m'
 
 # Syncing
 #
-# gpu pushes the current branch to the same name on origin and tracks
-# it. HEAD means the branch you are on. Once tracked it is just a push.
-# gpsu is for naming the remote and branch yourself:
-# `gpsu upstream my-branch`.
+# gpu is a plain push, which respects whatever upstream is already
+# set. Setting an upstream is its own deliberate command: gpsu takes
+# the remote and branch (`gpsu upstream my-branch`), and gpsuo is gpsu
+# with origin and the current branch filled in. HEAD means the branch
+# you are on.
 alias gfa='git fetch --all --tags --prune --jobs=10'
 alias gl='git pull'
-alias gpu='git push --set-upstream origin HEAD'
+alias gpu='git push'
 alias gpsu='git push --set-upstream'
+alias gpsuo='git push --set-upstream origin HEAD'
