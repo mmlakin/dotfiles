@@ -1,0 +1,4 @@
+# Global gitignore, linked to ~/.config/git/ignore.
+
+# macOS Finder metadata
+.DS_Store
