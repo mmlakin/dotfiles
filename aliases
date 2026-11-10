@@ -1,0 +1,42 @@
+# Sourced by zshrc.
+
+if (( $+commands[nvim] )); then
+  alias vim='nvim'
+fi
+
+# git
+#
+# Only the commands actually used. Names follow oh-my-zsh where its
+# names were already muscle memory. gcob follows from gco instead of
+# omz's gcb, and gcm is commit -m here, not omz's checkout-main.
+
+# Looking around
+alias gst='git status'
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias glog='git log --oneline --decorate --graph'
+
+# Branches
+alias gb='git branch'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gbD='git branch --delete --force'
+
+# Staging and committing
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit --verbose'
+alias gcm='git commit -m'
+
+# Syncing
+#
+# gpu is a plain push, which respects whatever upstream is already
+# set. Setting an upstream is its own deliberate command: gpsu takes
+# the remote and branch (`gpsu upstream my-branch`), and gpsuo is gpsu
+# with origin and the current branch filled in. HEAD means the branch
+# you are on.
+alias gfa='git fetch --all --tags --prune --jobs=10'
+alias gl='git pull'
+alias gpu='git push'
+alias gpsu='git push --set-upstream'
+alias gpsuo='git push --set-upstream origin HEAD'

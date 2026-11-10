@@ -1,0 +1,69 @@
+# Starship prompt
+#
+# The layout of oh-my-zsh's refined theme, which itself copies the
+# "pure" prompt: directory, git branch, dirty marker and slow-command
+# time on the first line, then the input character on its own line.
+# Based on `starship preset pure-preset`, with the nerd-font icons from
+# `starship preset nerd-font-symbols` on the branch, Python and
+# read-only directories. Needs a nerd font in the terminal.
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
+
+[directory]
+style = "blue"
+read_only = " 󰌾"
+
+# Purple when the last command succeeded, red when it failed, and
+# reversed and green in vi normal mode.
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[git_branch]
+format = "[$symbol$branch]($style)"
+symbol = " "
+style = "bright-black"
+
+# A single * when anything is uncommitted, then arrows for ahead or
+# behind the upstream and ≡ for stashes.
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
+# Mid-rebase or mid-merge state, with progress.
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+# Shown only for commands that took over 2 seconds.
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
+
+# The active virtualenv's name, only when one is active.
+[python]
+format = "[$symbol$virtualenv]($style) "
+symbol = " "
+style = "bright-black"
+detect_extensions = []
+detect_files = []
