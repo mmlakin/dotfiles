@@ -17,6 +17,9 @@
     ~/.zshrc:
       path: zshrc
       backup: true
+    ~/.config/starship.toml:
+      path: starship.toml
+      backup: true
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
