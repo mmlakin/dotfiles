@@ -11,14 +11,25 @@
     - ~/src
     - ~/bin
 
-# zsh. backup rather than force, so an existing ~/.zshrc on a new
+# Links use backup rather than force, so an existing file on a new
 # machine is renamed aside instead of deleted.
+
+# zsh and its prompt
 - link:
     ~/.zshrc:
       path: zshrc
       backup: true
     ~/.config/starship.toml:
       path: starship.toml
+      backup: true
+
+# git
+- link:
+    ~/.gitconfig:
+      path: gitconfig
+      backup: true
+    ~/.config/git/ignore:
+      path: gitignore
       backup: true
 
 - shell:

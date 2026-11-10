@@ -1,0 +1,32 @@
+# Baseline git config, linked to ~/.gitconfig.
+#
+# Git uses $EDITOR, which zshrc sets to nvim, so no core.editor here.
+# The global ignore file lives at ~/.config/git/ignore, which git
+# reads without any setting.
+
+[user]
+	name = Matt Lakin
+	email = 49107138+mmlakin@users.noreply.github.com
+
+[init]
+	defaultBranch = main
+
+# Pull only when it is a fast-forward. If the branches diverged, it
+# stops and the choice between rebase and merge is made by hand.
+[pull]
+	ff = only
+
+# Every fetch drops local refs to branches deleted on the remote.
+[fetch]
+	prune = true
+
+# histogram gives cleaner hunks than the default myers. colorMoved
+# shows moved lines in their own color instead of as delete and add.
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+# Layer hook, last so a layer wins. The work layer sets its own
+# user.email here.
+[include]
+	path = ~/.gitconfig_local
